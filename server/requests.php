@@ -2,6 +2,8 @@
 session_start();
 include('../configuration/db.php');
 
+$base_url = rtrim(dirname($_SERVER['SCRIPT_NAME'], 2), '/') . '/';
+
 // --------------------- SIGNUP ---------------------
 if (isset($_POST['signup'])) {
 
@@ -23,7 +25,7 @@ if (isset($_POST['signup'])) {
             "email"    => $email
         ];
 
-        header("Location: /phppractice");
+        header("Location: $base_url");
         exit;
     } else {
         echo $conn->error;
@@ -50,7 +52,7 @@ else if (isset($_POST['login'])) {
             "email"    => $row['email']
         ];
 
-        header("Location: /phppractice");
+        header("Location: $base_url");
         exit;
     } else {
         echo "Invalid email or password";
@@ -63,7 +65,7 @@ else if (isset($_GET['logout'])) {
     session_unset();
     session_destroy();
 
-    header("Location: /phppractice");
+    header("Location: $base_url");
     exit;
 }
 
@@ -87,14 +89,14 @@ else if (isset($_POST['ask'])) {
     $result = $conn->query($query);
 
     if ($result) {
-        header("Location: /phppractice");
+        header("Location: $base_url");
         exit;
     } else {
         echo $conn->error;
     }
 }
 
-// --------------------- LOGOUT ---------------------
+// --------------------- ANSWER ---------------------
 
 else if (isset($_POST['answer'])) {
 
@@ -114,7 +116,7 @@ else if (isset($_POST['answer'])) {
     $result = $conn->query($query);
 
     if ($result) {
-        header("Location: /phppractice/?q-id=$question_id");
+        header("Location: {$base_url}?q-id=$question_id");
         exit;
     } else {
         echo "Answer is not submitted.";
