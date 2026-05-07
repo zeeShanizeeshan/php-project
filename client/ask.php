@@ -1,6 +1,6 @@
 <div class="container">
     <h1 class="heading">Ask A Question</h1>
-    <form action="/php-project/server/requests.php" method="post">
+    <form action="./server/requests.php" method="post">
 
         <div class="col-6 offset-sm-3 margin-bottom">
             <label for="title" class="form-label">Title</label>
